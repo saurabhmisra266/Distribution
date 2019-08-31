@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.4
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: Aug 31, 2019 at 02:11 PM
+- Server version: 10.1.37-MariaDB
+- PHP Version: 7.3.0
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="java" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="users">
+                CREATE TABLE `users` (
+                  `username` varchar(50) NOT NULL,
+                  `fname` varchar(100) NOT NULL,
+                  `lname` varchar(100) NOT NULL,
+                  `paswrd` varchar(100) NOT NULL,
+                  `address` varchar(100) NOT NULL,
+                  `city` varchar(100) NOT NULL,
+                  `state` varchar(100) NOT NULL,
+                  `country` varchar(100) NOT NULL,
+                  `email` varchar(100) NOT NULL,
+                  `gender` varchar(10) NOT NULL,
+                  `IP` varchar(25) NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'java'
+    -->
+    <database name="java">
+        <!-- Table users -->
+        <table name="users">
+            <column name="username">ssa</column>
+            <column name="fname">sa</column>
+            <column name="lname">adq</column>
+            <column name="paswrd">qsf</column>
+            <column name="address">sdf</column>
+            <column name="city">qfs</column>
+            <column name="state">qsf</column>
+            <column name="country">qsfq</column>
+            <column name="email">sd</column>
+            <column name="gender"></column>
+            <column name="IP"></column>
+        </table>
+        <table name="users">
+            <column name="username">saurabh24</column>
+            <column name="fname">Saurabh</column>
+            <column name="lname">Mishra</column>
+            <column name="paswrd">lucknow1</column>
+            <column name="address">11/349 Indira Nagar Lucknow</column>
+            <column name="city">Lucknow</column>
+            <column name="state">Uttar Pradesh</column>
+            <column name="country">India</column>
+            <column name="email">saurabhmisra266@gmail.com</column>
+            <column name="gender"></column>
+            <column name="IP"></column>
+        </table>
+        <table name="users">
+            <column name="username">neelesh123</column>
+            <column name="fname">Neelesh</column>
+            <column name="lname">dsklj</column>
+            <column name="paswrd">1234</column>
+            <column name="address">flkda</column>
+            <column name="city">lkdsfj</column>
+            <column name="state">fdlk</column>
+            <column name="country">dlkjf</column>
+            <column name="email">dlksjf</column>
+            <column name="gender"></column>
+            <column name="IP"></column>
+        </table>
+        <table name="users">
+            <column name="username">stdrgfq</column>
+            <column name="fname">dfhg</column>
+            <column name="lname">ghj</column>
+            <column name="paswrd">1234</column>
+            <column name="address">hjk</column>
+            <column name="city">fghkj</column>
+            <column name="state">ghjk</column>
+            <column name="country">qfghkj</column>
+            <column name="email">hgjklqy</column>
+            <column name="gender">Male</column>
+            <column name="IP"></column>
+        </table>
+        <table name="users">
+            <column name="username">stdrgfq</column>
+            <column name="fname">dfhg</column>
+            <column name="lname">ghj</column>
+            <column name="paswrd">1234</column>
+            <column name="address">hjk</column>
+            <column name="city">fghkj</column>
+            <column name="state">ghjk</column>
+            <column name="country">qfghkj</column>
+            <column name="email">hgjklqy</column>
+            <column name="gender">Female</column>
+            <column name="IP"></column>
+        </table>
+        <table name="users">
+            <column name="username">sa24</column>
+            <column name="fname">Saurabh</column>
+            <column name="lname">Mishra</column>
+            <column name="paswrd">1234</column>
+            <column name="address">FAS</column>
+            <column name="city">fsa</column>
+            <column name="state">faQ</column>
+            <column name="country">DG</column>
+            <column name="email">af</column>
+            <column name="gender">Male</column>
+            <column name="IP">192.168.31.44</column>
+        </table>
+    </database>
+</pma_xml_export>

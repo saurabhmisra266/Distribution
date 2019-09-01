@@ -9,8 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import sample.DBConnector;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,14 +38,14 @@ public class LoginController {
             System.out.print(ps.toString());
             ResultSet res = ps.executeQuery();
             if (res.next()) {
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("start.fxml"));
-                rootPane.getChildren().setAll(pane);
-                while(true) {
-                    ServerSocket ss = new ServerSocket(2081);
-                }
+               Thread t1=new Dashboard(rootPane);
+               Thread t2=new Server();
+               t1.start();
+               t2.start();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

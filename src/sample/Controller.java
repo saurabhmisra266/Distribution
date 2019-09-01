@@ -58,6 +58,11 @@ public class Controller {
     public Controller() throws UnknownHostException {
     }
 
+    public void shutdown(){
+        System.out.println("System closing.");
+    }
+
+
     public void initialize() {
              gender.setItems(gen);
     }

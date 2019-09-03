@@ -11,9 +11,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Controller {
 
@@ -53,6 +60,7 @@ public class Controller {
     String ip=(localhost.getHostAddress()).trim();
 
 
+
     ObservableList<String> gen= FXCollections.observableArrayList("Male","Female");
 
     public Controller() throws UnknownHostException {
@@ -72,26 +80,15 @@ public class Controller {
         rootPane.getChildren().setAll(pane);
     }
     @FXML
-    public void addData(ActionEvent event){
-        try {
-            Connection connection = DBConnector.getConnection();
-            PreparedStatement PStatement = connection.prepareStatement("insert into users values(?,?,?,?,?,?,?,?,?,?,?)");
-            PStatement.setString(1, user.getText());
-            PStatement.setString(2, fname.getText());
-            PStatement.setString(3, lname.getText());
-            PStatement.setString(4, paswrd.getText());
-            PStatement.setString(5, address.getText());
-            PStatement.setString(6, city.getText());
-            PStatement.setString(7, state.getText());
-            PStatement.setString(8, cntry.getText());
-            PStatement.setString(9, email.getText());
-            PStatement.setString(10,gender.getValue().toString());
-            PStatement.setString(11,ip);
-            PStatement.executeUpdate();
-        }
-        catch (SQLException e1){
-            e1.printStackTrace();
-        }
+    public void addData(ActionEvent event) throws IOException {
+        List<String> a = Arrays.asList(user.getText(), fname.getText(), lname.getText(), state.getText(), cntry.getText(), paswrd.getText(),
+                city.getText(), address.getText(), email.getText(), gender.getValue().toString(), ip);
+        ArrayList<String> registerValues= new ArrayList<String>();
+        registerValues.addAll(a);
+        Socket s = new Socket("192.168.31.44",2082);
+        OutputStream outputStream = s.getOutputStream();
+        ObjectOutputStream ob = new ObjectOutputStream(outputStream);
+        ob.writeObject(registerValues);
     }
 
 }

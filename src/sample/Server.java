@@ -11,6 +11,7 @@ public class Server extends Thread {
     @Override
     public void run() {
         ServerSocket ss = null;
+        int i=0;
         try {
             ss = new ServerSocket(2081);
         } catch (IOException e) {
@@ -20,9 +21,10 @@ public class Server extends Thread {
             Socket s = null;
             try {
                 s = ss.accept();
-                InputStream dis =s.getInputStream();
-                OutputStream dos = new FileOutputStream("F://ssss.pdf");
-                Thread t = new ClientHandler(s, dis, dos);
+                InputStream is =s.getInputStream();
+
+                OutputStream os = new FileOutputStream("F://ssss"+i++);
+                Thread t = new ClientHandler(s, is, os);
                 t.start();
             } catch (Exception e) {
                 try {

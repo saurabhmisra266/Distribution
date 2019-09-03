@@ -9,11 +9,13 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 public class DashboardController {
 
     @FXML
-    public void upload(ActionEvent event)throws IOException {
+    public void upload(ActionEvent event) throws IOException, NoSuchAlgorithmException, SQLException {
         FileChooser fileChooser =new FileChooser();
         fileChooser.setInitialDirectory(new File("src"));
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();

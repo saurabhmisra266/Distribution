@@ -4,35 +4,33 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler extends Thread {
-    final InputStream dis;
-    final OutputStream dos;
+    final InputStream is;
+    final OutputStream os;
     final Socket s;
 
-    public ClientHandler(Socket s, InputStream dis, OutputStream dos)
+    public ClientHandler(Socket s, InputStream is, OutputStream os)
     {
         this.s = s;
-        this.dis = dis;
-        this.dos = dos;
+        this.is = is;
+        this.os = os;
     }
     @Override
     public void run(){
         System.out.println("Client Connected");
         int bytesRead = 0;
-        byte b[] = new byte[1024];
-
         byte[] buffer = new byte[1024];
 
         while (true) {
             try {
-                if (!((bytesRead = dis.read(buffer))!=-1)) break;
-                dos.write(buffer,0,bytesRead);
+                if (!((bytesRead = is.read(buffer))!=-1)) break;
+                os.write(buffer,0,bytesRead);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         try {
-            dos.flush();
-            dos.close();
+            os.flush();
+            os.close();
             s.close();
         } catch (IOException e) {
             e.printStackTrace();

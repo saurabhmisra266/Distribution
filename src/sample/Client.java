@@ -4,23 +4,36 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client {
     private static String filePath;
     public Client(String filePath) throws IOException {
         this.filePath = filePath;
     }
-    public static void upload()throws IOException {
+    public static void upload() throws IOException, SQLException {
         File file = new File(filePath);
-        Socket s = new Socket("localhost", 2081);
-        FileInputStream f=new FileInputStream(file);
-        BufferedInputStream bu =new BufferedInputStream(f);
-        OutputStream o=s.getOutputStream();
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = bu.read(buffer)) != -1) {
-            o.write(buffer, 0, bytesRead);
+        byte[] buffer;
+        SplitFile splitFile = new SplitFile();
+        List<File>files = splitFile.split(file);
+        Connection connection = DBConnector.getConnection();
+        List<String>ips = new ArrayList<String>();
+        Statement statement =null;
+        String query= "select * from users";
+        statement = connection.createStatement();
+        ResultSet res = statement.executeQuery(query);
+        while(res.next()){
+            ips.add(res.getString("ip"));
         }
-        o.close();
+        for(String z:ips){
+            System.out.println(z);
+        }
     }
 }

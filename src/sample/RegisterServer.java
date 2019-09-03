@@ -43,6 +43,21 @@ public class RegisterServer {
                     PStatement.setString(11, registerValues.get(10));
                     PStatement.executeUpdate();
                 }
+                else if(received.equals("Login")){
+                    in = s.getInputStream();
+                    ArrayList<String> loginValues  = new ArrayList<String>();
+                    ObjectInputStream ob = new ObjectInputStream(in);
+                    loginValues = (ArrayList<String>) ob.readObject();
+                    PreparedStatement ps = connection.prepareStatement("select * from users where username=? and paswrd=?");
+                    ps.setString(1, loginValues.get(0));
+                    ps.setString(2, loginValues.get(1));
+                    //String a=username.getText();String b=password.getText();
+                    ResultSet res = ps.executeQuery();
+                    if (res.next()) {
+                        DataOutputStream dataOutputStream = new DataOutputStream(s.getOutputStream());
+                        dataOutputStream.writeUTF("1");
+                    }
+                }
                 else{
                     List<String> ip = new ArrayList<String>();
                     Statement statement =null;

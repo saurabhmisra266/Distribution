@@ -79,8 +79,8 @@ public class Controller {
     }
     @FXML
     public void addData(ActionEvent event) throws IOException {
-        List<String> a = Arrays.asList(user.getText(), fname.getText(), lname.getText(), state.getText(), cntry.getText(), paswrd.getText(),
-                city.getText(), address.getText(), email.getText(), gender.getValue().toString(), ip);
+        List<String> a = Arrays.asList(user.getText(), fname.getText(), lname.getText(),paswrd.getText(),address.getText(),city.getText(),
+                state.getText(), cntry.getText(), email.getText(), gender.getValue().toString(), ip);
         ArrayList<String> registerValues= new ArrayList<String>();
         registerValues.addAll(a);
         Socket s = new Socket("192.168.31.44",2082);

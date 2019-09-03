@@ -59,6 +59,7 @@ public class RegisterServer {
                     }
                 }
                 else{
+
                     List<String> ip = new ArrayList<String>();
                     Statement statement =null;
                     String query= "select * from users";

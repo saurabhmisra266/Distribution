@@ -10,10 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -86,6 +84,8 @@ public class Controller {
         ArrayList<String> registerValues= new ArrayList<String>();
         registerValues.addAll(a);
         Socket s = new Socket("192.168.31.44",2082);
+        DataOutputStream dataOutputStream = new DataOutputStream(s.getOutputStream());
+        dataOutputStream.writeUTF("Register");
         OutputStream outputStream = s.getOutputStream();
         ObjectOutputStream ob = new ObjectOutputStream(outputStream);
         ob.writeObject(registerValues);

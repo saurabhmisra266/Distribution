@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DashboardController {
 
     @FXML
-    public void upload(ActionEvent event) throws IOException, NoSuchAlgorithmException, SQLException {
+    public void upload(ActionEvent event) throws IOException, NoSuchAlgorithmException, SQLException,ClassNotFoundException{
         FileChooser fileChooser =new FileChooser();
         fileChooser.setInitialDirectory(new File("src"));
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();

@@ -18,22 +18,19 @@ public class Client {
     public Client(String filePath) throws IOException {
         this.filePath = filePath;
     }
-    public static void upload() throws IOException, SQLException {
+    public static void upload() throws IOException, SQLException,ClassNotFoundException {
         File file = new File(filePath);
         byte[] buffer;
         SplitFile splitFile = new SplitFile();
         List<File>files = splitFile.split(file);
         Connection connection = DBConnector.getConnection();
-        List<String>ips = new ArrayList<String>();
-        Statement statement =null;
-        String query= "select * from users";
-        statement = connection.createStatement();
-        ResultSet res = statement.executeQuery(query);
-        while(res.next()){
-            ips.add(res.getString("ip"));
-        }
-        for(String z:ips){
-            System.out.println(z);
-        }
+        Socket s = new Socket("192.168.31.44",2082);
+        DataOutputStream dataOutputStream = new DataOutputStream(s.getOutputStream());
+        dataOutputStream.writeUTF("Retreive Ips");
+        InputStream inputStream = s.getInputStream();
+        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        ArrayList<String> ips = new ArrayList<String>();
+       ips  = (ArrayList<String>)objectInputStream.readObject();
+        for(String z:ips)System.out.println(z);
     }
 }

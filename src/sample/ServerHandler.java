@@ -19,7 +19,6 @@ public class ServerHandler extends Thread {
         Socket s = null;
 
         try {
-
             s = new Socket(ip, 2081);
             FileInputStream f=new FileInputStream(file);
             BufferedInputStream bu =new BufferedInputStream(f);

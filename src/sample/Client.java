@@ -20,10 +20,8 @@ public class Client {
     }
     public static void upload() throws IOException, SQLException,ClassNotFoundException {
         File file = new File(filePath);
-        byte[] buffer;
         SplitFile splitFile = new SplitFile();
         List<File>files = splitFile.split(file);
-        Connection connection = DBConnector.getConnection();
         Socket s = new Socket("192.168.31.44",2082);
         DataOutputStream dataOutputStream = new DataOutputStream(s.getOutputStream());
         dataOutputStream.writeUTF("Retreive Ips");
@@ -31,6 +29,11 @@ public class Client {
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         ArrayList<String> ips = new ArrayList<String>();
        ips  = (ArrayList<String>)objectInputStream.readObject();
-        for(String z:ips)System.out.println(z);
+       int z=0;
+        for(int i=0;i<files.size();i++){
+            Thread t=new ServerHandler(files.get(i),ips.get(z));
+            t.start();
+            z=(z+1)%ips.size();
+        }
     }
 }

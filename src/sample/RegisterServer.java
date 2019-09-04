@@ -73,9 +73,9 @@ public class RegisterServer {
                     OutputStream out  = s.getOutputStream();
                     ObjectOutputStream objectOutputStream  = new ObjectOutputStream(out);
                     objectOutputStream.writeObject(ips);
-                    for(String z:ip){
-                        System.out.println(z);
-                    }
+//                    for(String z:ip){
+//                        System.out.println(z);
+//                    }
                 }
             }
         }

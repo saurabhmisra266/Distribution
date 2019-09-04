@@ -22,7 +22,6 @@ public class Server extends Thread {
             try {
                 s = ss.accept();
                 InputStream is =s.getInputStream();
-
                 OutputStream os = new FileOutputStream("F://ssss"+i++);
                 Thread t = new ClientHandler(s, is, os);
                 t.start();

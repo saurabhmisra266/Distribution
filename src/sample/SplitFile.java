@@ -27,7 +27,7 @@ public class SplitFile {
         try {
             FileInputStream fis = new FileInputStream(file);
             BufferedInputStream bis =new BufferedInputStream(fis);
-            int bytes=0;
+            int bytes;
             while((bytes=bis.read(buffer))>0) {
                 String filePartName = file.getName()+(i++)+".pdf";
                 File fileParts = new File(file.getParent(),filePartName);
@@ -35,49 +35,19 @@ public class SplitFile {
                 FileOutputStream out = new FileOutputStream(fileParts);
                 out.write(buffer, 0,bytes);
                 files.add(fileParts);
+                out.flush();
+                out.close();
             }
-
+           fis.close();
+            bis.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return files;
     }
-    public static void main(String[] args)  throws IOException, NoSuchAlgorithmException{
 
-        // TODO Auto-generated method stub
-		File file = new File("F://uu.pdf");
-		File file1 = new File("F://panda.pdf");
-		List<File> files =new ArrayList<File>();
-		int size=1024*1024;
-		String z=generateHash(file);
-		int i = 0;
-		byte[] buffer =new byte[size];
 
-		try {
-		 FileInputStream fis = new FileInputStream(file);
-		 BufferedInputStream bis =new BufferedInputStream(fis);
-		 int bytes=0;
-			while((bytes=bis.read(buffer))>0) {
-				String filePartName = file.getName()+(i++)+".pdf";
-				File fileParts = new File(file.getParent(),filePartName);
-				//files.add(fileParts);
-				FileOutputStream out = new FileOutputStream(fileParts);
-				out.write(buffer, 0,bytes);
-                files.add(fileParts);
-			}
-
-            		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		File mergedFile = new File("F:\\uuu.pdf");
-		System.out.println(mergedFile.getAbsolutePath());
-		mergeFiles(files,mergedFile);
-		String w=generateHash(mergedFile);
-		System.out.println(z+"    "+w+"    "+z.equals(w));
-    }
     public static void mergeFiles(List<File> files, File into)
             throws IOException {
         try (FileOutputStream fos = new FileOutputStream(into);

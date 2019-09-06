@@ -10,19 +10,17 @@ import java.util.List;
 public class RegisterServer {
 
     public static void main(String[] args) throws IOException,ClassNotFoundException,SQLException {
-        ServerSocket ss = null;
-
-            ss = new ServerSocket(2082);
+        ServerSocket ss = new ServerSocket(2082);
+        Connection connection = DBConnector.getConnection();
+        InputStream in =null;
         System.out.println("Server Started");
         while(true){
             Socket s= null;
                 s = ss.accept();
-                System.out.println("Client connected for registration");
-                InputStream in = null;
+                System.out.println("Client connected");
                 DataInputStream din  = new DataInputStream(s.getInputStream());
                 String received = din.readUTF();
                 System.out.println(received);
-            Connection connection = DBConnector.getConnection();
                 if(received.equals("Register")) {
                     in = s.getInputStream();
                     ArrayList<String> registerValues  = new ArrayList<String>();
@@ -75,7 +73,24 @@ public class RegisterServer {
                     objectOutputStream.writeObject(ips);
 //                    for(String z:ip){
 //                        System.out.println(z);
-//                    }
+                    String hashFile = din.readUTF();
+                    String fileName = din.readUTF();
+                    System.out.println(hashFile);
+                    in  = s.getInputStream();
+                    File file = new File("E:\\",hashFile);
+                    out = new FileOutputStream(file);
+                    int bytesRead;
+                    byte buffer[] = new byte[1024];
+                    while((bytesRead=in.read(buffer))!=-1){
+                        out.write(buffer,0,bytesRead);
+                    }
+                    System.out.println(fileName);
+                    PreparedStatement preparedStatement = connection.prepareStatement("insert into uploadedfiles values(?,?)");
+                    preparedStatement.setString(1,fileName);
+                    preparedStatement.setString(2,hashFile);
+                    preparedStatement.executeUpdate();
+                    out.flush();
+                    out.close();
                 }
             }
         }

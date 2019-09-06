@@ -28,7 +28,7 @@ public class Dashboard extends Thread {
            @Override public void run() {
                AnchorPane pane = null;
                try {
-                   pane = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                   pane = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
                } catch (IOException e) {
                    e.printStackTrace();
                }

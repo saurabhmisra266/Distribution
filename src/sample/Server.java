@@ -13,7 +13,7 @@ public class Server extends Thread {
         ServerSocket ss = null;
         int i=0;
         try {
-            ss = new ServerSocket(2081);
+            ss = new ServerSocket(3081);
         } catch (IOException e) {
             e.printStackTrace();
         }

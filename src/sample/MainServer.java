@@ -27,6 +27,10 @@ public class MainServer {
                 Thread t = new LoginClentHandler(s,connection);
                 t.start();
             }
+            else if(received.equals("Retreive Extension")){
+                Thread t = new DownloadClientHandler(s,connection);
+                t.start();
+            }
             else{
                 Thread t =new UploadClientHandler(s,connection);
                 t.start();

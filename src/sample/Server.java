@@ -21,10 +21,22 @@ public class Server extends Thread {
             Socket s = null;
             try {
                 s = ss.accept();
-                InputStream is =s.getInputStream();
-                OutputStream os = new FileOutputStream("F://ssss"+i++);
-                Thread t = new ClientHandler(s, is, os);
-                t.start();
+                DataInputStream dataInputStream = new DataInputStream(s.getInputStream());
+                String request = dataInputStream.readUTF();
+                if(request.equals("Upload")) {
+                    String fileName = dataInputStream.readUTF();
+                    File file = new File("E://", fileName);
+                    InputStream is = s.getInputStream();
+                    OutputStream os = new FileOutputStream(file);
+                    Thread t = new ClientHandler(s, is, os,"Upload");
+                    t.start();
+                }
+                else{
+                    InputStream  is =s.getInputStream();
+                    OutputStream os =s.getOutputStream();
+                    Thread t = new ClientHandler(s,is,os,request);
+                    t.start();
+                }
             } catch (Exception e) {
                 try {
                     s.close();

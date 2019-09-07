@@ -29,7 +29,7 @@ public class SplitFile {
             BufferedInputStream bis =new BufferedInputStream(fis);
             int bytes;
             while((bytes=bis.read(buffer))>0) {
-                String filePartName = file.getName()+(i++)+".pdf";
+                String filePartName =file.getName()+(i++);
                 File fileParts = new File(file.getParent(),filePartName);
                 //files.add(fileParts);
                 FileOutputStream out = new FileOutputStream(fileParts);
@@ -54,6 +54,7 @@ public class SplitFile {
              BufferedOutputStream mergingStream = new BufferedOutputStream(fos)) {
             for (File f : files) {
                 Files.copy(f.toPath(), mergingStream);
+                if(f.delete())System.out.println("Chunk deleted");
             }
         }
     }

@@ -14,17 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
-        Parent root = loader.load();
-        Controller controller = loader.getController();
-       // Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 900, 625));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        primaryStage.setTitle("Distribution");
+        primaryStage.setScene(new Scene(root, 1081, 826));
         primaryStage.show();
-        primaryStage.setOnHidden(e -> {
-            controller.shutdown();
-            
-        });
     }
 
 
@@ -32,6 +25,8 @@ public class Main extends Application {
         InetAddress localhost = InetAddress.getLocalHost();
         System.out.println("System IP Address : " +
                 (localhost.getHostAddress()).trim());
+
+
         launch(args);
 
     }
